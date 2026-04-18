@@ -1,0 +1,24 @@
+# installing the requirements of packages
+
+streamlit  # webframework to stream our prompts and responses and UI
+google-generativeai # google generator to generate a response
+python-dotenv  # to load the environment variables 
+langchain   # langchain framework to integrate with the LLM and other libraries
+langchain-core # core langchain components
+langchain-classic # classic langchain chains
+langchain-text-splitters # text splitters for chunking documents
+PyPDF2  # pythons libary to read the PDF files and text from them
+faiss-cpu # act as vector database to store the data in vector form in high dimensional
+langchain_google_genai # used to integrate with the googles LLM like gemini models
+langchain-community
+flask-cors
+langdetect # language detection
+deep-translator # deep-translator to translate the text
+pyyaml # to read the yaml files
+streamlit_authenticator # to authenticate the users
+requests
+urllib3
+google-auth # Google authentication library
+google-auth-oauthlib # OAuth library for Google
+google-auth-httplib2 # HTTP library for Google Auth
+streamlit-oauth # OAuth integration for Streamlit

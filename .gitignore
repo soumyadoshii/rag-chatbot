@@ -1,0 +1,35 @@
+# --- Python & Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env
+
+# --- AI/ML Specific ---
+# Exclude local vector databases (Chroma, FAISS, etc.)
+*.db
+*.sqlite
+chroma/
+faiss_index/
+pickle/
+
+# --- Logs & Performance ---
+logs/
+*.log
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Large Files ---
+# Exclude models or large datasets if downloaded locally
+models/
+data/*.csv
+data/*.json
+!data/sample.json  # Keep sample files if needed
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

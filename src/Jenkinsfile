@@ -1,0 +1,80 @@
+def CREDENTIALS_ID = "gitlabcredadi"
+def BRANCH = "main"
+def GIT_REPO = "http://172.24.2.49:8082/aiml/ai-chatbot.git"
+def HOST_NAME = "34.124.174.83"
+def composeFileName = "unify-chat-bot.yaml"
+def CONTAINER_NAME = "chat-bot"
+def registry = "sandslash.group.sg"
+def TAG = "unify"
+def port = "51457"
+pipeline {
+    agent any
+    
+    stages {
+        stage("Clean Workspace") {
+            steps {
+                  cleanWs()
+            }
+        }
+        stage("Git") {
+            steps { 
+                git branch: "${BRANCH}", credentialsId: "${CREDENTIALS_ID}", url: "${GIT_REPO}"
+            }
+        }
+        stage('Git checkout') {
+            steps {
+                script{
+                    sh label: '', script: "git checkout "
+                }
+            }
+        }
+        stage('Image Build'){
+            steps {
+                script {
+                    sh "docker build -t ${registry}/${CONTAINER_NAME}:${TAG} ."
+                }
+            }
+        }
+        stage("Image push") {
+            steps {
+                script {
+                    sh "docker push ${registry}/${CONTAINER_NAME}:${TAG}"
+                }
+            }
+        }
+        stage('scp Docker compose file to the Server'){
+            steps {
+                script {
+                    sh "cd /var/lib/jenkins/workspace/ && scp -P ${port} -r ${composeFileName} ${HOST_NAME}:"
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    def containerExists = sh(script: "ssh -p ${port} ${HOST_NAME} 'sudo docker ps -a -q -f name=${CONTAINER_NAME}'", returnStdout: true).trim()
+                    
+                    if (containerExists) {
+                        // Stop and remove the container if it exists
+                        sh "ssh -p ${port} ${HOST_NAME} sudo docker stop ${CONTAINER_NAME}"
+                        sh "ssh -p ${port} ${HOST_NAME} sudo docker rm -fv ${CONTAINER_NAME}"
+                        sh "ssh -p ${port} ${HOST_NAME} sudo docker image rm ${registry}/${CONTAINER_NAME}:${TAG}"
+                    }
+                    sh "ssh -p ${port} ${HOST_NAME} sudo docker compose --compatibility -f ${composeFileName} up -d"
+                }
+            }
+        }
+    }
+        post {
+        success {
+            script {
+                echo 'Deployment was successful!'
+            }
+        }
+        failure {
+            script {
+                echo 'Deployment failed!'
+            }
+        }
+    }
+}

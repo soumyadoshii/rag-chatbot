@@ -1,0 +1,4 @@
+[server]
+port = 17179
+
+enableStaticServing = true

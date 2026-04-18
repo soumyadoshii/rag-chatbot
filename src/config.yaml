@@ -1,0 +1,31 @@
+admin_users:
+- suraj.galande
+- dhananjay.gundewar
+
+cookie:
+  expiry_days: 30
+  key: supersecretkeyunifychatbot0123456789
+  name: unify_auth
+
+credentials:
+  usernames:
+    dhananjay.gundewar:
+      email: dhananjay.gundewar@group.com
+      name: DJ
+      password: DJ@123
+    
+    suraj.galande:
+      email: suraj.galande@group.com
+      name: Suraj
+      password: Suraj@_7
+
+# Google OAuth Settings
+google_oauth:
+  enabled: true
+  allowed_domain: "group.com"
+  # Users who login via Google SSO will be regular users by default
+  # To make a Google SSO user an admin, add their email to admin_google_users list below
+  admin_google_users: []
+  Example: 
+  - suraj.galande@group.com
+  - dhananjay.gundewar@group.com
