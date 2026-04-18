@@ -1,20 +1,13 @@
-#  Unify AI ChatBot
-
-![Version](https://img.shields.io/badge/version-2.0-blue)
-![Python](https://img.shields.io/badge/python-3.12-blue)
-![Streamlit](https://img.shields.io/badge/streamlit-latest-red)
+#AI ChatBot
 
 ## Description
-The ChatBot, trained on Unify Wiki Documents, is an AI-powered assistant equipped to provide comprehensive information, answer queries, and engage in meaningful conversations about 's Unify retail application. It ensures accuracy in responses through its extensive knowledge base, making it a reliable resource for users seeking information about Unify's modules, features, and capabilities.
+The ChatBot,is an AI-powered assistant equipped to provide comprehensive information, answer queries, and engage in meaningful conversations about retail industry. It ensures accuracy in responses through its extensive knowledge base, making it a reliable resource for users seeking information about the industry.
 
 ## ✨ Features
 
 - 🤖 **AI-Powered Responses** using Google Gemini 2.0 Flash
 - 🌍 **Multi-language Support** with automatic translation
 - 📚 **RAG (Retrieval-Augmented Generation)** with FAISS vector database
-- 🔐 **Dual Authentication System**:
-  - Traditional username/password login
-  - **Google SSO** for @group.com users (NEW!)
 - 👥 **Role-Based Access Control** (Admin & User roles)
 - 📄 **PDF Document Training** (Admin only)
 - 💬 **Chat History** and conversation context
@@ -27,7 +20,7 @@ The ChatBot, trained on Unify Wiki Documents, is an AI-powered assistant equippe
 Traditional login for existing users with credentials stored in `config.yaml`.
 
 ### Option 2: Google SSO (NEW!)
-- Login with your @group.com Google account
+- Login with your @gmail.com Google account
 - One-click authentication
 - No password management needed
 - Automatic user provisioning
@@ -126,26 +119,26 @@ credentials:
   usernames:
     username1:
       name: "Display Name"
-      email: "user@group.com"
+      email: "user@gmail.com"
       password: "password123"
 
 google_oauth:
   enabled: true
-  allowed_domain: "group.com"
+  allowed_domain: "gmail.com"
   admin_google_users:
-    - admin@group.com
+    - admin@gmail.com
 ```
 
 ## 🐳 Docker Deployment
 
 ### Build Image:
 ```bash
-docker build -t unify-chatbot .
+docker build -t u-chatbot .
 ```
 
 ### Run Container:
 ```bash
-docker run -p 8501:8501 -p 17191:17191 unify-chatbot
+docker run -p 8501:8501 -p 17191:17191 u-chatbot
 ```
 
 ### Using Docker Compose:
@@ -203,7 +196,7 @@ ai-chatbot/
 
 ## Support
 For help and support:
-- **Email**: .LLM@group.com
+- **Email**: .LLM@gmail.com
 - **Documentation**: See docs/ folder
 - **Issues**: Contact your administrator
 
@@ -218,18 +211,5 @@ For help and support:
 - [ ] Password hashing (bcrypt)
 - [ ] Database integration (PostgreSQL)
 
-## 👥 Authors and Contributors
-- ** AI/ML Team**
-- **Suraj Galande** - suraj.galande@group.com
-- **Dhananjay Gundewar** - dhananjay.gundewar@group.com
-
-## 📄 License
-Internal  Project - All Rights Reserved
-
 ## Project Status
 🟢 **Active Development** - Version 2.0 with Google SSO integration complete
-
----
-
-**Last Updated**: December 10, 2025
-**Version**: 2.0.0 (Google SSO enabled)
